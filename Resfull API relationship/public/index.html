@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Class</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Danh sách lớp học</h1>
+<ul id="class"></ul>
+<button style="margin-right: 50px">
+    <a href="addClass.html">add Class</a>
+</button>
+<button style="margin-right: 50px">
+    <a href="updateClass.html">update Class</a>
+</button>
+<button>
+    <a href="deleteClass.html">delete Class</a>
+</button>
+<h1>Danh sách học sinh</h1>
+<ul id="students"></ul>
+
+<script>
+    fetch('http://localhost:8085/api/class')
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById("class");
+            data.forEach((item) => {
+                let listItem = document.createElement("li");
+                listItem.textContent = `id: ${item.id}, name: ${item.name}`;
+                list.appendChild(listItem);
+            })
+        })
+        .catch(error => console.error(error))
+
+
+
+    fetch('http://localhost:8085/api/student')
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById("students");
+            data.forEach((item) => {
+                let listItem = document.createElement("li");
+                listItem.textContent = `id: ${item.id}, name: ${item.name}`;
+                list.appendChild(listItem);
+            })
+        })
+        .catch(error => console.error(error))
+</script>
+</body>
+</html>

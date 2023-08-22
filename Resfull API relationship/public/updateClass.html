@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Class</title>
+</head>
+<body>
+<h1>Sửa tên lớp</h1>
+<p>Id lớp cần sửa: <input type="text" id="idClass" /></p>
+<p>Tên lớp mới: <input type="text" id="nameClass" /></p>
+<button id="submitButton">Submit</button>
+
+<script>
+    var idClass = document.getElementById("idClass")
+    var inputElement = document.getElementById("nameClass");
+    var submitButton = document.getElementById("submitButton");
+
+    submitButton.addEventListener("click", function() {
+        var inputIdValue = idClass.value;
+        var inputValue = inputElement.value;
+        var data = {
+            name: inputValue
+        };
+
+        var requestOptions = {
+            method: 'PUT',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(data),
+            redirect: 'follow'
+        };
+
+        var url = "http://localhost:8085/api/class/" + inputIdValue;
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error))
+
+        window.location.href = "index.html";
+
+    })
+</script>
+</body>
+</html>

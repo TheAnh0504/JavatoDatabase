@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add Class</title>
+</head>
+<body>
+<h1>Thêm lớp học</h1>
+<p>Tên lớp: <input type="text" id="class2" /></p>
+<button id="submitButton">Submit</button>
+
+<script>
+    var inputElement = document.getElementById("class2");
+    var submitButton = document.getElementById("submitButton");
+
+    submitButton.addEventListener("click", function() {
+        var inputValue = inputElement.value;
+        var data = {
+            name: inputValue
+        };
+
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(data),
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:8085/api/class", requestOptions)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+
+        window.location.href = "index.html";
+
+    })
+</script>
+</body>
+</html>

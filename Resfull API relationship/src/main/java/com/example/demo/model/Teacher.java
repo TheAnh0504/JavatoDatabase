@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,21 +9,18 @@ import java.util.Date;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String name;
     private Date date;
 
-    @OneToOne
+
+    @OneToOne(mappedBy = "teacher")
     private Class aclass;
 
-    // mappedBy trỏ tới tên biến teachers ở trong Student.
-    @ManyToMany(mappedBy = "teachers")
-    // LAZY để tránh việc truy xuất dữ liệu không cần thiết. Lúc nào cần thì mới query
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Collection<Student> students;
 }
