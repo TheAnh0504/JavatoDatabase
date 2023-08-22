@@ -1,8 +1,6 @@
 Student: id, name, date
 Class: id, name
 Teacher: id, name, date
-Book: id, name
 
 1 lớp có 1 giáo viên, có nhiều học sinh
-học sinh - book : n - n
 giáo viên - học sinh: n - n
